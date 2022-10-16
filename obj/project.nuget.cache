@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CWZPV3GFtt4ej57YVqY6XPvPfKeft3O9RbGLRwpJrWyU61k85f9SZzgCHk4sg1f0SPKig3dMFl2O0w0voIAo8g==",
+  "dgSpecHash": "p3O9L0Pu2QpSIhsjVFcOfTkzi6sHLrlLHYnGb5cfkxl7a6/oUGqCuKzwSeMVnpiQnQmZaKYXSkHK8eLrklMQRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
+  "projectFilePath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\catdotjs\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\catdotjs\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

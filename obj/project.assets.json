@@ -1868,11 +1868,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
+      "projectUniqueName": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
       "projectName": "ProjectElection_ServerProgram",
-      "projectPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
+      "projectPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
       "packagesPath": "C:\\Users\\catdotjs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram\\obj\\",
+      "outputPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\catdotjs\\AppData\\Roaming\\NuGet\\NuGet.Config",

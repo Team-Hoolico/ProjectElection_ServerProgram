@@ -27,7 +27,7 @@ app.UseAuthorization();
 
 app.MapGet("/Count/", async(int val) =>
 {
-    await using (NpgsqlCommand test = (new NpgsqlCommand("SELECT count(UID) FROM votes", conn)))
+    await using (NpgsqlCommand test = new NpgsqlCommand("SELECT count(UID) FROM votes", conn))
     await using (var read = await test.ExecuteReaderAsync()){
         
         while(await read.ReadAsync()) { 
@@ -37,12 +37,36 @@ app.MapGet("/Count/", async(int val) =>
     return Results.BadRequest("/Count/");
 });
 
-app.MapPost("/AddVote/", async (long UID,long Captain) =>
+app.MapPost("/RegisterVoter/", async (long UID) =>
 {
-    await using (NpgsqlCommand test = (new NpgsqlCommand($"INSERT INTO votes (UID,ChosenCaptain) VALUES ({UID},{Captain})", conn)))
+    await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO votes (UID,ChosenCaptain) VALUES ({UID},0)", conn)){
+        try {
+            int result = await test.ExecuteNonQueryAsync();
+            return Results.Created("/RegisterVote/", result);
+        }catch(Exception e){
+            return Results.BadRequest(e.Message);
+        }
+    }
+});
+
+
+// FIX THIS
+app.MapGet("/ValidateVoter/", async (long UID, long Captain) =>
+{
+    await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO votes (UID,ChosenCaptain) VALUES ({UID},{Captain})", conn))
     {
         int result = await test.ExecuteNonQueryAsync();
-        return Results.Created("/AddVote/",result)
+        return Results.Created("/AddVote/", result);
+    }
+});
+
+// FIX THIS
+app.MapPost("/CastVote/", async (long UID,long Captain) =>
+{
+    await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO votes (UID,ChosenCaptain) VALUES ({UID},{Captain})", conn))
+    {
+        int result = await test.ExecuteNonQueryAsync();
+        return Results.Created("/AddVote/", result);
     }
 });
 app.Run();
