@@ -55,6 +55,7 @@ app.MapPost("/RegisterVoter/", async (long UID) =>
 {
     await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO Votes (UID) VALUES ({UID})", conn)){
         try {
+            await test.ExecuteNonQueryAsync();
             return Results.Created("/RegisterVote/", "success"); //Response Code 201
         }catch(Exception e){
             return Results.BadRequest(e.Message); //Response Code 400
