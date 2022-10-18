@@ -13,8 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment()){
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -37,22 +36,30 @@ try {
 //Gotta Make the DB prior
 //UID: BigInt, VotedTeamId: BigInt, VotedCaptainIds: BigInt[]
 
-//Still has no use
-app.MapGet("/Count/", async(int val) =>
-{
-    await using (NpgsqlCommand test = new NpgsqlCommand("SELECT count(UID) FROM Votes", conn))
+//Returns amount of voters for a captain
+app.MapGet("/GetCaptainVotes/", async(int CaptainId) =>{
+    await using (NpgsqlCommand test = new NpgsqlCommand($"SELECT count(UID) FROM Votes WHERE {CaptainId}=ANY(VotedCaptainIds)", conn))
     await using (var read = await test.ExecuteReaderAsync()){
-        
         while(await read.ReadAsync()) { 
-            return Results.Accepted("/Count/", read.GetInt64(0));
+            return Results.Accepted("/GetCaptainVotes/", read.GetInt64(0));
         }
     }
-    return Results.BadRequest("/Count/");
+    return Results.BadRequest("failed");
+});
+
+// Returns amount of voters for a teamId
+app.MapGet("/GetTeamVotes/", async(int TeamId) =>{
+    await using (NpgsqlCommand test = new NpgsqlCommand($"SELECT count(UID) FROM Votes WHERE votedteamid={TeamId}", conn))
+    await using (var read = await test.ExecuteReaderAsync()){
+        while(await read.ReadAsync()) { 
+            return Results.Accepted("/GetTeamVotes/", read.GetInt64(0));
+        }
+    }
+    return Results.BadRequest("failed");
 });
 
 // Returns 400 if fails, 200 if succeeds to register voter to database
-app.MapPost("/RegisterVoter/", async (long UID) =>
-{
+app.MapPost("/RegisterVoter/", async (long UID) =>{
     await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO Votes (UID) VALUES ({UID})", conn)){
         try {
             await test.ExecuteNonQueryAsync();
@@ -63,31 +70,33 @@ app.MapPost("/RegisterVoter/", async (long UID) =>
     }
 });
 
+// Casts vote, if fails status code 400
+app.MapPost("/CastVote/", async (long UID,long VotedTeamId, string VotedCaptainIds) =>{
+    await using (NpgsqlCommand test = new NpgsqlCommand($"UPDATE votes SET votedteamid={VotedTeamId}, votedcaptainids='{VotedCaptainIds}' WHERE uid = {UID};", conn)){
+        try{
+            int result = await test.ExecuteNonQueryAsync();
+            return Results.Created("/CastVote/", "success"); //Response Code 200
+        }catch(Exception e){
+            return Results.BadRequest(e.Message); //Response Code 400
+        }
+    }
+});
+
 // Returns 422 if there is server error, 400 if UID is not in DB and 200 if UID is in DB
-app.MapGet("/ValidateVoter/", async (long UID) =>
-{
+app.MapGet("/ValidateVoter/", async (long UID) =>{
     await using (NpgsqlCommand test = new NpgsqlCommand($"SELECT count(UID) FROM Votes WHERE UID = {UID}", conn))
     await using (var read = await test.ExecuteReaderAsync()){
-        try {
-            while(await read.ReadAsync()) { 
-                if (read.GetInt32(0)==1) {
+        try{
+            while (await read.ReadAsync()){
+                if (read.GetInt32(0) == 1){
                     return Results.Ok("success"); //Response Code 200
                 }
             }
             return Results.BadRequest("failed"); //Response Code 400
         }
-        catch(Exception e){
+        catch (Exception e){
             return Results.UnprocessableEntity(e.Message); //Response Code 422
         }
-    }
-});
-
-// FIX THIS
-app.MapPost("/CastVote/", async (long UID,long VotedTeamId, long[] VotedCaptainIds) =>
-{
-    await using (NpgsqlCommand test = new NpgsqlCommand($"INSERT INTO votes (UID,VotedTeamId,VotedCaptainIds) VALUES ({UID},{VotedTeamId},{VotedCaptainIds})", conn)){
-        int result = await test.ExecuteNonQueryAsync();
-        return Results.Created("/AddVote/", result);
     }
 });
 

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Doruk\\Desktop\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj": {}
+    "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Doruk\\Desktop\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj": {
+    "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Doruk\\Desktop\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
+        "projectUniqueName": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
         "projectName": "ProjectElection_ServerProgram",
-        "projectPath": "C:\\Users\\Doruk\\Desktop\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
-        "packagesPath": "C:\\Users\\Doruk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Doruk\\Desktop\\ProjectElection_ServerProgram\\obj\\",
+        "projectPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\ProjectElection_ServerProgram.csproj",
+        "packagesPath": "C:\\Users\\catdotjs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\catdotjs\\Desktop\\github\\ProjectElection_ServerProgram\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Doruk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\catdotjs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,8 +63,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -80,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
