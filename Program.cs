@@ -84,7 +84,7 @@ app.MapPost("/CastVote/", async (long UID,long VotedTeamId, string VotedCaptainI
 
 // Returns 422 if there is server error, 400 if UID is not in DB and 200 if UID is in DB
 app.MapGet("/ValidateVoter/", async (long UID) =>{
-    await using (NpgsqlCommand test = new NpgsqlCommand($"SELECT count(UID) FROM Votes WHERE UID = {UID}", conn))
+    await using (NpgsqlCommand test = new NpgsqlCommand($"SELECT count(UID) FROM Votes WHERE UID = {UID} AND votedteamid is NULL", conn))
     await using (var read = await test.ExecuteReaderAsync()){
         try{
             while (await read.ReadAsync()){
